@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RandomDraw
@@ -17,6 +12,7 @@ namespace RandomDraw
         DataSet ds;
         List<string> allNames;
         int total;
+        double count = Int32.Parse(MyConfiguration.getSetting("groupNumber"));
         public AutoAssignForm()
         {
             InitializeComponent();
@@ -25,6 +21,99 @@ namespace RandomDraw
       
 
         private void buttonImport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(this.textBoxFile.Text))
+                {
+                    MessageBox.Show("请先选择文件所在路径！");
+                }
+                else { 
+                        //获取用户选择的文件，并判断文件大小不能超过20K，fileInfo.Length是以字节为单位的
+                        FileInfo fileInfo = new FileInfo(this.textBoxFile.Text );
+                        //dataGridView1.DataSource = ProcessExcel.EcxelToDataGridView(fileInfo.FullName).Tables[0].DefaultView;
+                        ds = ProcessExcel.EcxelToDataGridView(fileInfo.FullName);
+                }
+                total = ds.Tables[0].Rows.Count;
+                
+                this.textBoxStatus.Text = string.Format("已成功导入名单，共{0}人", total);
+                this.comboBoxGroupNo.Items.Clear();
+                for (int i=1;i<= Math.Ceiling(total / (count <= 0 ? 1 : count)); i++)
+                {
+                    this.comboBoxGroupNo.Items.Add(string.Format("第{0}分组",i)); 
+                }
+                this.comboBoxGroupNo.SelectedIndex = 0;
+                allNames = toList(ds.Tables[0]);
+            }
+            catch (Exception err)
+            {
+                this.textBoxStatus.Text = string.Format("导入失败！");
+            }
+        }
+
+        private void buttonAssign_Click(object sender, EventArgs e)
+        {
+            bool sign = true;
+            DataTable tempDT=new DataTable();
+            if ("未导入".Equals(this.textBoxStatus.Text)){
+                MessageBox.Show("请先导入名单！");
+            }
+            else
+            {
+                string cbIndex = this.comboBoxGroupNo.SelectedText;
+                foreach(DataTable dt in ds.Tables)
+                {
+                    if (cbIndex.Equals(dt.TableName))
+                    {
+                        tempDT = dt;
+                        sign = false;
+                        MessageBox.Show("该组已分配！");
+                    }  
+                }
+                if (allNames.Count == 0)
+                {
+                    sign = false;
+                    MessageBox.Show("已经全部分配完成！");
+                }
+                if (sign)
+                {
+                    tempDT = new DataTable(cbIndex);
+                    DataColumn dc1 = new DataColumn("编号", Type.GetType("System.Int32"));
+                    DataColumn dc2 = new DataColumn("姓名", Type.GetType("System.String"));
+                    tempDT.Columns.Add(dc1);
+                    tempDT.Columns.Add(dc2);
+                    for (int i = 0; i < count; i++)
+                    {
+                        Random ran = new Random();
+                        int n = ran.Next(0,allNames.Count-1);
+                        string tempName = allNames[n];
+                        allNames.RemoveAt(n);
+                        DataRow dr = tempDT.NewRow();
+                        dr["编号"] = i + 1;
+                        dr["姓名"] = tempName;
+                        tempDT.Rows.Add(dr);
+                        if (allNames.Count == 0)
+                        {
+                            break;
+                        }
+                    }
+                }
+                this.dataGridView1.DataSource = tempDT.DefaultView;
+                
+            }
+        }
+
+        private List<string> toList(DataTable dt)
+        {
+            List<string> list = new List<string>();
+            foreach(DataRow dr in dt.Rows)
+            {
+                list.Add(dr[0].ToString());
+            }
+            return list;
+        }
+
+        private void buttonFile_Click(object sender, EventArgs e)
         {
             try
             {
@@ -44,47 +133,14 @@ namespace RandomDraw
                     }
                     else
                     {
-                        //获取用户选择的文件，并判断文件大小不能超过20K，fileInfo.Length是以字节为单位的
-                        FileInfo fileInfo = new FileInfo(fileDialog.FileName);
-                        //dataGridView1.DataSource = ProcessExcel.EcxelToDataGridView(fileInfo.FullName).Tables[0].DefaultView;
-                        ds = ProcessExcel.EcxelToDataGridView(fileInfo.FullName);
+                        this.textBoxFile.Text = fileDialog.FileName;
                     }
                 }
-                total = ds.Tables[0].Rows.Count;
-                double count = Int32.Parse(MyConfiguration.getSetting("groupNumber")) ;
-                this.textBoxStatus.Text = string.Format("已成功导入名单，共{0}人", total);
-                this.comboBoxGroupNo.Items.Clear();
-                for (int i=1;i<= Math.Ceiling(total / (count <= 0 ? 1 : count)); i++)
-                {
-                    this.comboBoxGroupNo.Items.Add(string.Format("第{0}分组",i));
-                }
-                
             }
             catch (Exception err)
             {
-                this.textBoxStatus.Text = string.Format("导入失败！");
+                this.textBoxStatus.Text = string.Format("选择路径失败！");
             }
-        }
-
-        private void buttonAssign_Click(object sender, EventArgs e)
-        {
-            if ("未导入".Equals(this.textBoxStatus.Text)){
-                MessageBox.Show("请先导入名单！");
-            }
-            else
-            {
-
-            }
-        }
-
-        private List<string> toList(DataTable dt)
-        {
-            List<string> list = new List<string>();
-            foreach(DataRow dr in dt.Rows)
-            {
-                list.Add(dr[0].ToString());
-            }
-            return list;
         }
     }
 }

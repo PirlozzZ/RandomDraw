@@ -26,6 +26,7 @@ namespace RandomDraw
 
         private void button1_Click(object sender, EventArgs e)
         {
+            try { 
             int count;
             if (!Int32.TryParse(this.textBoxGroupNumber.Text,out count))
             {
@@ -37,6 +38,12 @@ namespace RandomDraw
             }
             MyConfiguration.updateSeeting("title", this.textBoxTitle.Text);
             MyConfiguration.updateSeeting("groupNumber", this.textBoxGroupNumber.Text);
+                MessageBox.Show("保存成功！");
+            }
+            catch(Exception err)
+            {
+                MessageBox.Show("保存失败！");
+            }
         }
 
         private void textBoxGroupNumber_KeyPress(object sender, KeyPressEventArgs e)

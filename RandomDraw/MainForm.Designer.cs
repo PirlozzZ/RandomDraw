@@ -30,16 +30,16 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.抽签ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.自动分配ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.人员抽签ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.基础设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelMain = new System.Windows.Forms.Panel();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
             this.抽签ToolStripMenuItem,
             this.基础设置ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -50,25 +50,9 @@
             // 
             // 抽签ToolStripMenuItem
             // 
-            this.抽签ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.自动分配ToolStripMenuItem,
-            this.人员抽签ToolStripMenuItem});
             this.抽签ToolStripMenuItem.Name = "抽签ToolStripMenuItem";
-            this.抽签ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
-            this.抽签ToolStripMenuItem.Text = "抽签";
-            // 
-            // 自动分配ToolStripMenuItem
-            // 
-            this.自动分配ToolStripMenuItem.Name = "自动分配ToolStripMenuItem";
-            this.自动分配ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.自动分配ToolStripMenuItem.Text = "自动分配";
-            this.自动分配ToolStripMenuItem.Click += new System.EventHandler(this.自动分配ToolStripMenuItem_Click);
-            // 
-            // 人员抽签ToolStripMenuItem
-            // 
-            this.人员抽签ToolStripMenuItem.Name = "人员抽签ToolStripMenuItem";
-            this.人员抽签ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.人员抽签ToolStripMenuItem.Text = "人员抽签";
+            this.抽签ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
+            this.抽签ToolStripMenuItem.Text = "人员抽签";
             // 
             // 基础设置ToolStripMenuItem
             // 
@@ -84,6 +68,13 @@
             this.panelMain.Name = "panelMain";
             this.panelMain.Size = new System.Drawing.Size(955, 472);
             this.panelMain.TabIndex = 2;
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(68, 21);
+            this.toolStripMenuItem1.Text = "自动分配";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // MainForm
             // 
@@ -109,9 +100,8 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 抽签ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 基础设置ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 自动分配ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 人员抽签ToolStripMenuItem;
         private System.Windows.Forms.Panel panelMain;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
 }
 

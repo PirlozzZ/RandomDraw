@@ -21,11 +21,7 @@ namespace RandomDraw
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (basicFrom == null)
-            {
-                basicFrom = new BasicForm();
-                basicFrom.TopLevel = false;
-            }
+
             if (autoAssignForm == null)
             {
                 autoAssignForm = new AutoAssignForm();
@@ -42,13 +38,29 @@ namespace RandomDraw
         private void 基础设置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //this.Controls.Clear();
+            if (basicFrom == null)
+            {
+                basicFrom = new BasicForm();
+                basicFrom.TopLevel = false;
+            }
             basicFrom.Show();
             this.panelMain.Controls.Clear();
             basicFrom.Parent = this.panelMain;
+            autoAssignForm.Close(); 
+            autoAssignForm = new AutoAssignForm();
+            autoAssignForm.TopLevel = false;
+
         }
 
-        private void 自动分配ToolStripMenuItem_Click(object sender, EventArgs e)
+        
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            if (autoAssignForm == null)
+            {
+                autoAssignForm = new AutoAssignForm();
+                autoAssignForm.TopLevel = false;
+            }
             autoAssignForm.Show();
             this.panelMain.Controls.Clear();
             autoAssignForm.Parent = this.panelMain;
