@@ -76,6 +76,7 @@
             this.comboBoxGroupNo.Name = "comboBoxGroupNo";
             this.comboBoxGroupNo.Size = new System.Drawing.Size(317, 20);
             this.comboBoxGroupNo.TabIndex = 3;
+            this.comboBoxGroupNo.SelectedIndexChanged += new System.EventHandler(this.comboBoxGroupNo_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -97,6 +98,7 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridView1.Location = new System.Drawing.Point(62, 128);

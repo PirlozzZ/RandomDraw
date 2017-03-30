@@ -55,12 +55,13 @@ namespace RandomDraw
         {
             bool sign = true;
             DataTable tempDT=new DataTable();
-            if ("未导入".Equals(this.textBoxStatus.Text)){
+            if ("未导入".Equals(this.textBoxStatus.Text)|| "导入失败！".Equals(this.textBoxStatus.Text))
+            {
                 MessageBox.Show("请先导入名单！");
             }
             else
             {
-                string cbIndex = this.comboBoxGroupNo.SelectedText;
+                string cbIndex = this.comboBoxGroupNo.SelectedItem.ToString();
                 foreach(DataTable dt in ds.Tables)
                 {
                     if (cbIndex.Equals(dt.TableName))
@@ -97,21 +98,14 @@ namespace RandomDraw
                             break;
                         }
                     }
+                    ds.Tables.Add(tempDT);
                 }
                 this.dataGridView1.DataSource = tempDT.DefaultView;
                 
             }
         }
 
-        private List<string> toList(DataTable dt)
-        {
-            List<string> list = new List<string>();
-            foreach(DataRow dr in dt.Rows)
-            {
-                list.Add(dr[0].ToString());
-            }
-            return list;
-        }
+        
 
         private void buttonFile_Click(object sender, EventArgs e)
         {
@@ -142,5 +136,36 @@ namespace RandomDraw
                 this.textBoxStatus.Text = string.Format("选择路径失败！");
             }
         }
+
+        private void comboBoxGroupNo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string cbIndex = this.comboBoxGroupNo.SelectedItem.ToString();
+            foreach (DataTable dt in ds.Tables)
+            {
+                if (cbIndex.Equals(dt.TableName))
+                {
+                    this.dataGridView1.DataSource = dt.DefaultView;
+                    break;
+                }
+                else
+                {
+                    this.dataGridView1.DataSource = null;
+                }
+                
+            }
+        }
+
+
+        private List<string> toList(DataTable dt)
+        {
+            List<string> list = new List<string>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                list.Add(dr[0].ToString());
+            }
+            return list;
+        }
+
+        
     }
 }
