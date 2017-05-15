@@ -37,6 +37,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.textBoxFile = new System.Windows.Forms.TextBox();
             this.buttonFile = new System.Windows.Forms.Button();
+            this.buttonExport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -105,7 +106,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(786, 319);
+            this.dataGridView1.Size = new System.Drawing.Size(786, 290);
             this.dataGridView1.TabIndex = 6;
             // 
             // textBoxFile
@@ -126,11 +127,22 @@
             this.buttonFile.UseVisualStyleBackColor = true;
             this.buttonFile.Click += new System.EventHandler(this.buttonFile_Click);
             // 
+            // buttonExport
+            // 
+            this.buttonExport.Location = new System.Drawing.Point(773, 424);
+            this.buttonExport.Name = "buttonExport";
+            this.buttonExport.Size = new System.Drawing.Size(75, 23);
+            this.buttonExport.TabIndex = 10;
+            this.buttonExport.Text = "导出";
+            this.buttonExport.UseVisualStyleBackColor = true;
+            this.buttonExport.Click += new System.EventHandler(this.buttonExport_Click);
+            // 
             // AutoAssignForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(891, 476);
+            this.Controls.Add(this.buttonExport);
             this.Controls.Add(this.buttonFile);
             this.Controls.Add(this.textBoxFile);
             this.Controls.Add(this.dataGridView1);
@@ -160,5 +172,6 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TextBox textBoxFile;
         private System.Windows.Forms.Button buttonFile;
+        private System.Windows.Forms.Button buttonExport;
     }
 }

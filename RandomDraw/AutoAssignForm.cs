@@ -166,6 +166,9 @@ namespace RandomDraw
             return list;
         }
 
-        
+        private void buttonExport_Click(object sender, EventArgs e)
+        {
+            ProcessExcel.OutToExcelFromDataGridView(MyConfiguration.getSetting("title"), dataGridView1, false);
+        }
     }
 }
