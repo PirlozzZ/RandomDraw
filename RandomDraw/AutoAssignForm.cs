@@ -168,7 +168,15 @@ namespace RandomDraw
 
         private void buttonExport_Click(object sender, EventArgs e)
         {
-            ProcessExcel.OutToExcelFromDataGridView(MyConfiguration.getSetting("title"), dataGridView1, false);
+            if (dataGridView1.Rows.Count == 0)
+            {
+                MessageBox.Show("当前组尚未分配");
+            }
+            else
+            {
+                ProcessExcel.OutToExcelFromDataGridView(MyConfiguration.getSetting("title"), dataGridView1, false);
+            }
+            
         }
     }
 }

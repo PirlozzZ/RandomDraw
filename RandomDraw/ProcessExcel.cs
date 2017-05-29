@@ -109,6 +109,8 @@ namespace RandomDraw
                 {
                     excel.Application.Workbooks.Add(true);
                     excel.Visible = isShowExcel;
+                    excel.DisplayAlerts = false;
+                    excel.AlertBeforeOverwriting = false;
                     /*分析标题的跨列数*/
                     foreach (DataGridViewColumn column in dgv.Columns)
                     {
@@ -133,11 +135,12 @@ namespace RandomDraw
                             columnIndex++;
                         }
                     }
+   
                     //填充数据              
-                    for (int i = 0; i < dgv.RowCount; i++)
+                    for (int i = 0; i < dgv.Rows.Count-1; i++)
                     {
                         columnIndex = 1;
-                        for (int j = 0; j < dgv.ColumnCount; j++)
+                        for (int j = 0; j < dgv.Columns.Count; j++)
                         {
                             if (dgv.Columns[j].Visible == true)
                             {
@@ -156,7 +159,9 @@ namespace RandomDraw
                     }
                     worksheet.SaveAs(fileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
                 }
-                catch { }
+                catch(Exception e) {
+                    string TEMP = e.Message;
+                }
                 finally
                 {
                     excel.Quit();
