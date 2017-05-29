@@ -90,7 +90,7 @@
             // 
             // textBoxStatus
             // 
-            this.textBoxStatus.Location = new System.Drawing.Point(643, 85);
+            this.textBoxStatus.Location = new System.Drawing.Point(643, 87);
             this.textBoxStatus.Name = "textBoxStatus";
             this.textBoxStatus.ReadOnly = true;
             this.textBoxStatus.Size = new System.Drawing.Size(205, 21);

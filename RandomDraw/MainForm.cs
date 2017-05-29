@@ -14,6 +14,7 @@ namespace RandomDraw
     {
         BasicForm basicFrom;
         AutoAssignForm autoAssignForm;
+        RandomDrawForm randomDrawForm;
         public MainForm()
         {
             InitializeComponent();
@@ -46,9 +47,12 @@ namespace RandomDraw
             basicFrom.Show();
             this.panelMain.Controls.Clear();
             basicFrom.Parent = this.panelMain;
+
             autoAssignForm.Close(); 
             autoAssignForm = new AutoAssignForm();
             autoAssignForm.TopLevel = false;
+             
+
 
         }
 
@@ -64,6 +68,19 @@ namespace RandomDraw
             autoAssignForm.Show();
             this.panelMain.Controls.Clear();
             autoAssignForm.Parent = this.panelMain;
+        }
+
+        private void 抽签ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //this.Controls.Clear();
+            if (randomDrawForm == null)
+            {
+                randomDrawForm = new RandomDrawForm();
+                randomDrawForm.TopLevel = false;
+            }
+            randomDrawForm.Show();
+            this.panelMain.Controls.Clear();
+            randomDrawForm.Parent = this.panelMain; 
         }
     }
 }

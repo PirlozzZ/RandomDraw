@@ -60,6 +60,7 @@
             this.抽签ToolStripMenuItem.Name = "抽签ToolStripMenuItem";
             this.抽签ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
             this.抽签ToolStripMenuItem.Text = "人员抽签";
+            this.抽签ToolStripMenuItem.Click += new System.EventHandler(this.抽签ToolStripMenuItem_Click);
             // 
             // 基础设置ToolStripMenuItem
             // 
